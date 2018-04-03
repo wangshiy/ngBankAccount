@@ -1,5 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+// Angular Material
+import { MaterialModule } from './material.module';
+
+// Services
+import { ApiServiceService } from './services/api-service.service';
 
 import { AppComponent } from './app.component';
 import { AppRouting } from './app.routes';
@@ -17,9 +25,14 @@ import { AccountConfirmComponent } from './account-confirm/account-confirm.compo
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    FormsModule,
     AppRouting
   ],
-  providers: [],
+  providers: [
+    ApiServiceService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

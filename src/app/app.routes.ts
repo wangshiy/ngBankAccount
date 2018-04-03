@@ -15,7 +15,7 @@ export const routes: Routes = [
     component: AccountSelectComponent
   },
   {
-    path: 'account-detail',
+    path: 'account-detail/:id',
     component: AccountDetailComponent
   },
   {
