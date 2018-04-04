@@ -1,3 +1,46 @@
-<p>
-  account-detail works!
-</p>
+<div class="container">
+  <header>
+    <h1>Select Account Type</h1>
+  </header>
+
+  <div>
+    <mat-list>
+      <mat-list-item class="list-item">
+        <div>
+          <h4>{{account.type}}</h4>
+          <p>{{account.title1}} {{account.title2}}</p>
+        </div>
+      </mat-list-item>
+      <mat-list-item class="list-item">
+        <a mat-button routerLink="/account-select" color="primary">< Edit relationship account</a>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <h4>Please select the account you would like to open: </h4>
+      </mat-list-item>
+      <mat-list-item class="list-item">
+        <mat-radio-group (change)="onChange($event)">
+          <mat-radio-button *ngFor="let detail of details" [value]="detail">
+            {{detail.description}}
+          </mat-radio-button>
+        </mat-radio-group>
+      </mat-list-item>
+      <mat-list-item class="list-item">
+        <mat-select placeholder="Select Currency" (change)="onCurrencyChange($event)">
+          <mat-option *ngFor="let currency of currencies" [value]="currency">
+            {{currency.description}}
+          </mat-option>
+        </mat-select>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+  </div>
+
+  <footer>
+    <p>Your account will be opened immediately after the confirmation by authorization code and is immediately ready for use. If in doubt, please contact the advisor by phone.</p>
+    <div class="button-group">
+      <button mat-raised-button color="primary" (click)="onNext()" [disabled]="invalid">Next</button>
+      <button mat-raised-button>Cancel</button>
+    </div>
+  </footer>
+</div>

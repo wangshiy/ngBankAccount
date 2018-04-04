@@ -12,13 +12,17 @@ import 'rxjs/add/operator/takeUntil';
 })
 export class AccountSelectComponent implements OnInit, OnDestroy {
 
-  private favoriteSeason: string;
+  private selectedAccount: object;
   private accounts: object[];
   private destroy$: Subject<boolean> = new Subject<boolean>();
+  private invalid: boolean;
 
   constructor(
     private router: Router,
     private apiServiceService: ApiServiceService) {
+    this.selectedAccount = null;
+    this.accounts = [];
+    this.invalid = true;
   }
 
   ngOnInit() {
@@ -39,8 +43,14 @@ export class AccountSelectComponent implements OnInit, OnDestroy {
       });
   }
 
-  onSubmit() {
-    this.router.navigateByUrl('account-detail');
+  onChange(e) {
+    this.invalid = false;
+    this.selectedAccount = e.value;
+  }
+
+  onNext() {
+    const accountId = this.selectedAccount['id'];
+    this.router.navigateByUrl(`account-detail/${accountId}`);
   }
 
 }

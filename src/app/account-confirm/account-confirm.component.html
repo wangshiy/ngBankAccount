@@ -1,3 +1,34 @@
-<p>
-  account-confirm works!
-</p>
+<div class="container">
+  <header>
+    <h1>Review & Confirm</h1>
+    <p>Please review and confirm the details below before proceeding.</p>
+  </header>
+
+  <div>
+    <mat-list>
+      <mat-list-item class="list-item">
+        <div>
+          <h4>Currency</h4>
+          <p>{{currency.description}}</p>
+        </div>
+      </mat-list-item>
+      <mat-list-item class="list-item">
+        <div>
+          <h4>Account Type</h4>
+          <p>{{detail.description}}</p>
+        </div>
+      </mat-list-item>
+      <mat-list-item class="list-item">
+        <a mat-button [routerLink]="editDetailsUrl" color="primary">< Edit details</a>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+  <footer>
+    <p>Your account will be opened immediately after the confirmation by authorization code and is immediately ready for use. If in doubt, please contact the advisor by phone.</p>
+    <div class="button-group">
+      <button mat-raised-button color="primary">Confirm</button>
+      <button mat-raised-button>Cancel</button>
+    </div>
+  </footer>
+</div>

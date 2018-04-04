@@ -1,0 +1,19 @@
+.container {
+  margin: 0 auto;
+  width: 80%;
+}
+
+header, footer {
+  text-align: center;
+}
+
+.account-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.account {
+  background-color: rgba(229,229,229,0.7);
+  margin: 1rem;
+  padding: 0.5rem;
+}

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ApiServiceService } from '../services/api-service.service';
 import { Subject } from 'rxjs/Subject';
 
@@ -13,11 +13,29 @@ import 'rxjs/add/operator/takeUntil';
 export class AccountDetailComponent implements OnInit, OnDestroy {
   private destroy$: Subject<boolean> = new Subject<boolean>();
   private accountId: string;
+  private detailId: string;
+  private currencyId: string;
+  private account: object;
+  private details: object[];
+  private currencies: object[];
+  private invalid: boolean;
 
   constructor(
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     private apiServiceService: ApiServiceService,
   ) {
+    this.accountId = '';
+    this.detailId = '';
+    this.currencyId = '';
+    this.account = {
+      type: '',
+      title1: '',
+      title2: ''
+    };
+    this.details = [];
+    this.currencies = [];
+    this.invalid = true;
     this.activatedRoute.params
       .takeUntil(this.destroy$)
       .subscribe( (params) => {
@@ -28,21 +46,50 @@ export class AccountDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.getAccountById('4936860403166155298');
+    this.getAccountById(this.accountId);
+    this.getAccountDetail();
   }
 
   ngOnDestroy() {
     this.destroy$.next(true);
   }
 
+  onChange(e) {
+    this.detailId = e.value.id;
+    this.currencies = e.value.candidateCurrencyList;
+  }
+
+  onCurrencyChange(e) {
+    this.invalid = false;
+    this.currencyId = e.value.id;
+  }
+
   getAccountById(accountId: string) {
     this.apiServiceService.getAccountById(accountId)
       .takeUntil(this.destroy$)
       .subscribe((res) => {
-        console.log('res', res);
+        this.account = res;
       }, (err) => {
         console.error(`error: ${err}`);
       });
+  }
+
+  getAccountDetail() {
+    this.apiServiceService.getAccountDetails()
+      .takeUntil(this.destroy$)
+      .subscribe((res) => {
+        this.details = res;
+      }, (err) => {
+        console.error(`error: ${err}`);
+      });
+  }
+
+  onNext() {
+    const accountId = this.accountId;
+    const detailId = this.detailId;
+    const currencyId = this.currencyId;
+    this.router.navigate([`/account-confirm/${accountId}/${detailId}`],
+      { queryParams: { currencyId: currencyId}, queryParamsHandling: 'merge' });
   }
 
 }
