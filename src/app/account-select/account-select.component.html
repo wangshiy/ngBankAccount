@@ -1,24 +1,25 @@
-<div>
-  <h1>Select Account</h1>
-  <p>Please select the relationship account</p>
-</div>
-<div>
-  <!--<form (ngSubmit)="onSubmit()">-->
-    <label for="male">Male</label>
-    <input type="radio" name="gender" id="male" value="male"><br>
-    <label for="female">Female</label>
-    <input type="radio" name="gender" id="female" value="female"><br>
-    <label for="other">Other</label>
-    <input type="radio" name="gender" id="other" value="other"><br><br>
-    <button (click)="onSubmit()">Submit</button>
-  <!--</form>-->
+<div class="container">
+  <header>
+    <h1>Select Account</h1>
+    <p>Please select the relationship account.</p>
+  </header>
 
-  <mat-radio-group class="example-radio-group" [(ngModel)]="favoriteSeason">
-    <mat-radio-button class="example-radio-button" *ngFor="let account of accounts" [value]="account">
-      {{account.title1}}
-    </mat-radio-button>
-  </mat-radio-group>
-  <div class="example-selected-value">Your favorite season is: {{favoriteSeason}}</div>
+  <div>
+    <mat-radio-group class="account-container" (change)="onChange($event)">
+      <mat-radio-button class="account" *ngFor="let account of accounts" [value]="account">
+        <div>
+          <h4>{{account.type}}</h4>
+          <p>{{account.title1}} {{account.title2}}</p>
+        </div>
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
 
-  <button mat-button>Click me!</button>
+  <footer>
+    <p>Your account will be opened immediately after the confirmation by authorization code and is immediately ready for use. If in doubt, please contact the advisor by phone.</p>
+    <div class="button-group">
+      <button mat-raised-button color="primary" (click)="onNext()" [disabled]="invalid">Next</button>
+      <button mat-raised-button>Cancel</button>
+    </div>
+  </footer>
 </div>

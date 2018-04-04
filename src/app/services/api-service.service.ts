@@ -17,12 +17,21 @@ export class ApiServiceService {
     const mockAccount = mockAccountData.filter((e) => {
       return e.id === accountId;
     });
-    return Observable.of(mockAccount)
+    return Observable.of(mockAccount[0])
       .delay(Math.random() * 500);
   }
 
   getAccountDetails() {
+    return Observable.of(mockAccountDetailData)
+      .delay(Math.random() * 500);
+  }
 
+  getAccountDetailById(detailId: string) {
+    const mockDetail = mockAccountDetailData.filter((e) => {
+      return e.id === detailId;
+    });
+    return Observable.of(mockDetail[0])
+      .delay(Math.random() * 500);
   }
 
 }
@@ -39,5 +48,66 @@ const mockAccountData = [
     type: 'Sole Owner',
     title1: 'PXNX ZXIXNXEX FXDXLXS',
     title2: 'AXTXFXKX',
+  }
+];
+
+const mockAccountDetailData = [
+  {
+    id: '001',
+    description: 'Sub Account',
+    candidateCurrencyList: [
+      {
+        id: 'EUR',
+        description: 'EUR'
+      },
+      {
+        id: 'CHF',
+        description: 'CHF'
+      },
+      {
+        id: 'PLN',
+        description: 'PLN'
+      },
+      {
+        id: 'USD',
+        description: 'USD'
+      }
+    ]
+  },
+  {
+    id: '007',
+    description: 'Savings Account',
+    candidateCurrencyList: [
+      {
+        id: 'GBP',
+        description: 'GBP'
+      },
+      {
+        id: 'PLN',
+        description: 'PLN'
+      },
+      {
+        id: 'USD',
+        description: 'USD'
+      },
+      {
+        id: 'EUR',
+        description: 'EUR'
+      }
+    ]
+  },
+  {
+    id: '024',
+    description: 'Super Saving Account',
+    candidateCurrencyList: [
+      {
+        id: 'GBP',
+        description: 'GBP'
+      },
+      {
+        id: 'USD',
+        description: 'USD'
+      }
+    ]
   }
 ];

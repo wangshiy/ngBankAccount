@@ -19,7 +19,7 @@ export const routes: Routes = [
     component: AccountDetailComponent
   },
   {
-    path: 'account-confirm',
+    path: 'account-confirm/:accountId/:detailId',
     component: AccountConfirmComponent
   }
 ];

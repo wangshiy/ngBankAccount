@@ -1,0 +1,12 @@
+.list-item {
+  height: 100% !important;
+}
+
+.container {
+  margin: 0 auto;
+  width: 80%;
+}
+
+header, footer {
+  text-align: center;
+}
